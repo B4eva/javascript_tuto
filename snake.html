@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>snake Game</title>
+</head>
+<body>
+   <h1><canvas id="gameCanvas" width="300" height="300"></canvas></h1> 
+   <script>
+   /** CONSTANTS **/
+   const CANVAS_BORDER_COLOUR = 'black';
+   const CANVAS_BACKGROUND_COLOUR = "white";
+   const SNAKE_COLOUR = 'lightgreen';
+   const SNAKE_BORDER_COLOUR = 'darkgreen';
+
+
+   let snake = [
+      {x:150,  y:150},
+      {x:140,  y:150},
+      {x:130,  y:150},
+      {x:120,  y:150},
+      {x:110,  y:150},
+
+];
+
+
+   // get the canvas element
+   var gameCanvas = document.getElementById("gameCanvas");
+
+   // return to two dimentional drawing context
+
+   var ctx = gameCanvas.getContext("2d");
+
+   // select the colour to fill the canvas
+   ctx.fillStyle = CANVAS_BACKGROUND_COLOUR;
+   // select the colour for the border of the canvas
+
+   ctx.strokesstyle = CANVAS_BORDER_COLOUR;
+
+   // Draw a "filled" rectangle to cover the entire canvas
+
+   ctx.fillRect(0 , 0, gameCanvas.width, gameCanvas.height);
+   // Draw a "border" around the entire canvas
+
+   ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height); 
+
+   drawSnake();
+
+
+   function drawSnake(){
+       // loop through the snake parts drawing each part on the canvas
+       snake.forEach(drawSnakePart);
+   }   
+   /* 
+   *Draws a part of the snake on the canvas
+   *@param {object} snakePart - THe coordinates where the part should be drawn 
+   */ 
+
+
+   // draws the snake on the canvas
+   function drawSnakePart(snakePart){
+
+       // ser the colour of th snake part
+
+
+       ctx.fillStyle = SNAKE_COLOUR;
+
+       // SET THE BORDER COLOUR OF THE SNAKE PART
+       ctx.strokestyle = SNAKE_BORDER_COLOUR;
+// draw a "filled" rectangle to represent the snake part at the coordinates
+// the part is located
+       ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
+       
+       // Draw a border around the snake part
+       ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
+   }
+
+   function advanceSnake(){
+      const head = {x: snake[0].x + dx, y: snake[0].y};
+
+      snake.unshift(head);
+      snake.pop();
+
+   }
+
+   
+   
+   
+   
+   </script>
+</body>
+</html>
